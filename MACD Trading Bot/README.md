@@ -8,4 +8,4 @@ The profits for such a strategy are recorded below.
 
 ![Screenshot](results.png)
 
-Whilst this makes a theoretical profit, as soon as you put such an algorithm live factors such as transaction fees, latencey issues etc. throw this out the window. Not going to spend too much more time on this specific algorithm, but the data collection modules prove extremely useful for other projects
+Whilst this makes a theoretical profit, as soon as you put such an algorithm live factors such as transaction fees, latencey issues etc.  thisprofit goes out the window. Not going to spend too much more time on this specific algorithm, but the data collection modules prove extremely useful for other projects
