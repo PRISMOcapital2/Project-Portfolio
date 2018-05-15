@@ -5,4 +5,10 @@ The program then iterates through the entire history of prices and other indicat
 
 Intuitively, if there are a larger number of recognised patterns that are similar to the Chosen Pattern, then it's more likely that the pattern is a recurring phenomena. As this process is done for each indicator and each time step in Bitcoin's history however, the selection of the afore mentioned 'upper bounds' is key. If they're too high then there will be too many recognised patterns, too small there won't be enough. This forms a nice optimisation problem, as we want to find the optimal parameters to find the most patterns with the most significance - this will be a future post. If the pattern is recognised enough times, then it is saved to a recognisedPatterns array, alongside other relevant information. Below are some examples of recognised patterns.
 
+<p align="center">
+  <img src="plot1.png" width="350"/>
+  <img src="plot2.png" width="350"/>
+  <img src="plot3.png" width="350"/>
+  <img src="plot4.png" width="350"/>
+</p>
 
