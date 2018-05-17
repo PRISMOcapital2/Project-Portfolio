@@ -8,6 +8,6 @@ Once the data has been pulled and arrayed, we want to see what its like in its r
 Next is the testing of stationarity. " If the hypothesis λ = 0 can be rejected, that means the next move Δy(t) depends on the current level y(t − 1)" - Ernie Chan. The test statistic for this is  λ/SE(λ), and is regressed on Δy(t) = λy(t − 1) + μ + βt + α1Δy(t − 1) + … + αkΔy(t − k) + ∋(t). When we run such a test on white noise, or on a sin plot for a set period, we know these periods are mean reverting and that λ!=0, so they are good test cases as proofs of concept.
 
 <p align="center">
-  <img src="whitenoiseADF.png" width="350"/>
-  <img src="sinADF.png" width="350"/>
+  <img src="whitenoiseADF.png" width="700"/>
+  <img src="sinADF.png" width="700"/>
 </p>
