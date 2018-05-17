@@ -55,5 +55,5 @@ As expected, both return test statistics << 1% confidence, so we can confidently
   <img src="bitcoinADF.png" width="400">
 </p>
 
-i.e. with p = 0.8 we cannot reject the null so we can't say that the prices for bitcoin prices are mean reverting.
+i.e. with p = 0.8 we cannot reject the null so we can't say that the prices for bitcoin prices are mean reverting. I'll now venture in to Hurst Exponents - another test for a mean reverting time series
 
