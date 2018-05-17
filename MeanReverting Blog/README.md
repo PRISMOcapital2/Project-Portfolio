@@ -11,3 +11,9 @@ Next is the testing of stationarity. " If the hypothesis λ = 0 can be rejected,
   <img src="whitenoiseADF.png" width="700"/>
   <img src="sinADF.png" width="700"/>
 </p>
+
+As expected, both return test statistics << 1% confidence, so we can confidently reject the null that λ = 0 i.e. the series is mean reverting, at a rate proportional to λ. Carrying out the same test on prices of bitcoin at 5 minute ticks, however:
+
+<p align="center">
+  <img src="bitcoinADF.png" width="700"/>
+</p>
