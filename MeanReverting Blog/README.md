@@ -9,6 +9,8 @@ Next is the testing of stationarity. " If the hypothesis λ = 0 can be rejected,
 
 Code:
 ```
+from statsmodels.tsa.stattools import adfuller
+
 def test_stationarity(ts):
     #results of ADF test
     adf = adfuller(ts, autolag='AIC')
@@ -19,6 +21,7 @@ def test_stationarity(ts):
     plt.show()
 ```
 The time series analysis plots give insight into the autocorrelation (correlation of residuals) which we also require to not exist for a stationary series. (code from http://www.blackarbs.com/blog/time-series-analysis-in-python-linear-models-to-garch/11/1/2016):
+
 ```
 def tsplot(y, lags=None, figsize=(10,8), style='bmh'):
     if not isinstance(y, pd.Series):
