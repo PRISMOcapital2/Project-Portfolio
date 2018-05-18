@@ -58,7 +58,7 @@ As expected, both return test statistics << 1% confidence, so we can confidently
 i.e. with p = 0.8 we cannot reject the null so we can't say that the prices for bitcoin prices are mean reverting. I'll now venture in to Hurst Exponents - another test for a mean reverting time series.
 
 
-
+/n/n/n
 ## Hurst Exponent
 Following a post on https://stackoverflow.com/questions/39488806/hurst-exponent-in-python, if H<0.5 the series is mean reverting, if H>0.5 it's trending. If H=0.5, its a geometric walk.
 ```
@@ -77,5 +77,5 @@ Now to test it on bitcoin prices, we find:
     H(buttcoin - 5m - past 17 days) ~ 0.45
     H(bitcon - 5m - past 1.7 days ~ 0.415
     
-Both of these indicate that the price of coin is weakly mean reverting in the short run and less so in the long run.
+All of these indicate that the price of coin is weakly mean reverting in the short run and less so in the long run.
     
