@@ -55,9 +55,9 @@ As expected, both return test statistics << 1% confidence, so we can confidently
   <img src="bitcoinADF.png" width="400">
 </p>
 
-i.e. with p = 0.8 we cannot reject the null so we can't say that the prices for bitcoin prices are mean reverting. I'll now venture in to Hurst Exponents - another test for a mean reverting time series. Following a post on https://stackoverflow.com/questions/39488806/hurst-exponent-in-python,
-Dr Chan states that if z is the log price, then volatility, sampled at intervals of τ, is volatility(τ)=√(Var(z(t)-z(t-τ))). To me another way of describing volatility is standard deviation, so std(τ)=√(Var(z(t)-z(t-τ)))
+i.e. with p = 0.8 we cannot reject the null so we can't say that the prices for bitcoin prices are mean reverting. I'll now venture in to Hurst Exponents - another test for a mean reverting time series. Following a post on https://stackoverflow.com/questions/39488806/hurst-exponent-in-python:
 ```
+Dr Chan states that if z is the log price, then volatility, sampled at intervals of τ, is volatility(τ)=√(Var(z(t)-z(t-τ))). To me another way of describing volatility is standard deviation, so std(τ)=√(Var(z(t)-z(t-τ)))
 std is just the root of variance so var(τ)=(Var(z(t)-z(t-τ)))
 Dr Chan then states: In general, we can write Var(τ) ∝ τ^(2H) where H is the Hurst exponent
 Hence (Var(z(t)-z(t-τ))) ∝ τ^(2H)
