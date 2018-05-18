@@ -4,6 +4,7 @@
 The aim is to build a live platform that trades off a mean reverting strategy. To implement such a strategy, we need a stationary time series. All the time series that we deal with will not be stationary in their given form, so we must transform them. As is my other projects, I will be testing on bitcoin as its the omst readily available currencey that I have access to the data of. 
 
 Once the data has been pulled and arrayed, we want to see what its like in its raw form so we inspect the autocorrelations of the data. (Recall that a stationary time series has no autocorrelations in residuals). Log returns are usually stationary about a mean zero, so that it the first transformation we need to make. 
+## ADF Test
 
 Next is the testing of stationarity. " If the hypothesis λ = 0 can be rejected, that means the next move Δy(t) depends on the current level y(t − 1)" - Ernie Chan. The test statistic for this is  λ/SE(λ), and is regressed on Δy(t) = λy(t − 1) + μ + βt + α1Δy(t − 1) + … + αkΔy(t − k) + ∋(t). When we run such a test on white noise, or on a sin plot for a set period, we know these periods are mean reverting and that λ!=0, so they are good test cases as proofs of concept.
 
@@ -55,7 +56,10 @@ As expected, both return test statistics << 1% confidence, so we can confidently
   <img src="bitcoinADF.png" width="400">
 </p>
 
-i.e. with p = 0.8 we cannot reject the null so we can't say that the prices for bitcoin prices are mean reverting. I'll now venture in to Hurst Exponents - another test for a mean reverting time series. Following a post on https://stackoverflow.com/questions/39488806/hurst-exponent-in-python:
+i.e. with p = 0.8 we cannot reject the null so we can't say that the prices for bitcoin prices are mean reverting. I'll now venture in to Hurst Exponents - another test for a mean reverting time series.
+
+## Hurst Exponent
+Following a post on https://stackoverflow.com/questions/39488806/hurst-exponent-in-python:
 ```
 Dr Chan states that if z is the log price, then volatility, sampled at intervals of τ, is volatility(τ)=√(Var(z(t)-z(t-τ))). To me another way of describing volatility is standard deviation, so std(τ)=√(Var(z(t)-z(t-τ)))
 std is just the root of variance so var(τ)=(Var(z(t)-z(t-τ)))
@@ -64,3 +68,7 @@ Hence (Var(z(t)-z(t-τ))) ∝ τ^(2H)
 Taking the log of each side we get log (Var(z(t)-z(t-τ))) ∝ 2H log τ
 [ log (Var(z(t)-z(t-τ))) / log τ ] / 2 ∝ H (gives the Hurst exponent) where we know the term in square brackets on far left is the slope of a log-log plot of tau and a corresponding set of variances.
 ```
+Again our test cases will be the sin and white noise functions, where we'd expect a hurst exponent of 0 according to the above. Running the program for these cases we find:
+<p align="center">
+  <img src="hurst.png" width="500">
+</p>
