@@ -69,6 +69,3 @@ Taking the log of each side we get log (Var(z(t)-z(t-τ))) ∝ 2H log τ
 [ log (Var(z(t)-z(t-τ))) / log τ ] / 2 ∝ H (gives the Hurst exponent) where we know the term in square brackets on far left is the slope of a log-log plot of tau and a corresponding set of variances.
 ```
 Again our test cases will be the sin and white noise functions, where we'd expect a hurst exponent of 0 according to the above. Running the program for these cases we find:
-<p align="center">
-  <img src="hurst.png" width="500">
-</p>
