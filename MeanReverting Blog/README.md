@@ -57,8 +57,10 @@ As expected, both return test statistics << 1% confidence, so we can confidently
 
 i.e. with p = 0.8 we cannot reject the null so we can't say that the prices for bitcoin prices are mean reverting. I'll now venture in to Hurst Exponents - another test for a mean reverting time series.
 
+
+
 ## Hurst Exponent
-Following a post on https://stackoverflow.com/questions/39488806/hurst-exponent-in-python, if H<0.5 the series is mean reverting, if H>0.5 it's trending.
+Following a post on https://stackoverflow.com/questions/39488806/hurst-exponent-in-python, if H<0.5 the series is mean reverting, if H>0.5 it's trending. If H=0.5, its a geometric walk.
 ```
 Dr Chan states that if z is the log price, then volatility, sampled at intervals of τ, is volatility(τ)=√(Var(z(t)-z(t-τ))). To me another way of describing volatility is standard deviation, so std(τ)=√(Var(z(t)-z(t-τ)))
 std is just the root of variance so var(τ)=(Var(z(t)-z(t-τ)))
@@ -67,7 +69,7 @@ Hence (Var(z(t)-z(t-τ))) ∝ τ^(2H)
 Taking the log of each side we get log (Var(z(t)-z(t-τ))) ∝ 2H log τ
 [ log (Var(z(t)-z(t-τ))) / log τ ] / 2 ∝ H (gives the Hurst exponent) where we know the term in square brackets on far left is the slope of a log-log plot of tau and a corresponding set of variances.
 ```
-Again our test cases will be the sin and white noise functions, where we'd expect a hurst exponent of 0 according to the above. Running the program for these cases we find H(white noise)=0.00128, H(sin) = 0.98756. Our hypothesis is met in the case of white noise, but not for the sin curve. This is because sin was only covering one period. Inputting a time series with ~100 periods, we et H(sin)~0.14, which as we expected is strongly mean reverting. 
+Again our test cases will be the sin and white noise functions, where we'd expect a hurst exponent of 0 according to the above.Also for a geometric random walk, we expect H(randWalk)=0.5. Running the program for these cases we find H(white noise)=0.00128, H(sin) = 0.98756. Our hypothesis is met in the case of white noise, but not for the sin curve. This is because sin was only covering one period. Inputting a time series with ~100 periods, we et H(sin)~0.14, which as we expected is strongly mean reverting. Further, H(randWalk)=0.49984.... ~ 0.5 as expected.
 
 Now to test it on bitcoin prices, we find:
     H(bitcoin - 1hr - past 20 days) ~ 0.45
