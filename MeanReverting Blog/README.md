@@ -124,20 +124,4 @@ def vratio(a, lag = 2, cor = 'hom'):
  
     return  vratio, zscore, pval
 ```
-
-## Half life of mean reversion
-
-It can be shown that the half life of decay in the expected value of prices in the Ornstien Uhlenbeck process is -log(2)/lambda, where lambda is the regression coefficient in the equation used in the ADF test. Hence we can find lambda by regressing y(t)-y(t-1) against y(t):
-```
-def half_life(y):
-    lag = y.shift(1)
-    lag[0]=0
-    deltaY = y-lag
-    deltaY[0]=0
-
-    lagConst = sm.add_constant(lag) # adds a intercept value to the x variable
-    model = sm.OLS(deltaY, lagConst)
-    res = model.fit()
-    halfLife = -math.log(2)/res.params[1]
-```
-for 30 minute bitcoin tick prices, we find there is a half life of mean reversion of ~8 days. This is noice, as it gives us a natural time scale for parameters such as moving averages and standard deviations. Using these we can construct a basic trading strategy.
+Again running this on a test case of white noise, we get "Variance Ratio Test: (0.4833121939238241, -16.33910306436103, 0.0)". As expected, this is telling us that there is a probability of 0 that this series DOES NOT has a hurst exponent of H = 0.48 ~ 0.5. Seems to be working as expected. Running it on 5m bitcoin prices for the last 5000 ticks, we retrieve:
