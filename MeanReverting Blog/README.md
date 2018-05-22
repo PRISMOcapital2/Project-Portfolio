@@ -174,7 +174,7 @@ Critical Value (10%)             -2.567079
 ```
 According to this, the price series' are almost at the 5% level that mu!=0. This is a strong indication that our price series are cointegrated, but we can visualise it by plotting the residuals of the model:
 <p align="center">
-  <img src="cointegrationBTCXMR.png" width="800">
+  <img src="cointegrationBTCXMR.png" width="500">
 </p>
 This shows the residuals bouncing around 0, this looks like a stationary curve and also looks like money.
 
