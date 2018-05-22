@@ -138,4 +138,6 @@ For each tick, we sell the pervious shares and buy new shares at the new market 
     PNL(t) = #unitsOwned * changeInPrice = mVal(y-1)(y(t)-y(t-1)/y(t-1), where y is the price at time t.
 
 Plotting a cumulative distribtion plot of this data, we should get a graph representing the P&L over the given timeframe. The main testcase here is a comparison to Ernie Chan's book. Using the USDCAD data, we get the following test statistics and P&L:
-
+<p align="center">
+  <img src="bitcoinADF.png" width="400">
+</p>
