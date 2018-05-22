@@ -124,4 +124,18 @@ def vratio(a, lag = 2, cor = 'hom'):
  
     return  vratio, zscore, pval
 ```
-Again running this on a test case of white noise, we get "Variance Ratio Test: (0.4833121939238241, -16.33910306436103, 0.0)". As expected, this is telling us that there is a probability of 0 that this series DOES NOT has a hurst exponent of H = 0.48 ~ 0.5. Seems to be working as expected. Running it on 5m bitcoin prices for the last 5000 ticks, we retrieve:
+Again running this on a test case of white noise, we get "Variance Ratio Test: (0.4833121939238241, -16.33910306436103, 0.0)". As expected, this is telling us that there is a probability of 0 that this series DOES NOT has a hurst exponent of H = 0.48 ~ 0.5. Seems to be working as expected. Running it on 5m bitcoin prices for the last 5000 ticks, we retrieve H = 0.4564870082435933. This indicates that the price series is weakly mean reverting. Furthermore, when running the hurst exponent on the USDCAD data (as seen in Ernie Chan's book), we retrieve the same H=0.49 as ernie did. Wahoo.
+
+## Half life of mean reversion
+Doing some magical math (again see ernie chan's books) leads us to the fact that the half life of mean reversion is equal to ln(2)/lambda, where lambda is the coefeccient of the regression y(t)-y(t-1) vs y(t). This half life is neat because: ``` It determines a natural time scale for many parameters in our strategy. For example, if the half life is 20 days, we shouldn’t use a look-back of 5 days to compute a moving average or standard deviation for a mean-reversion strategy.```
+All test cases are again passed (comparing to ernie's book with the same data we get the same value), so it's now time to implement a basic trading strategy to test the theory.
+
+##  Linear trading strategy
+The following is a strategy to highlight the POTENTIAL for profit, but is not an optimal trading strategy at all.
+We simply seek to own a quantity of stock proportional to the negative normalised deviation from the moving average, with standard deviation given by a moving std:
+    mVal = - (y-movingAve)/movingStd
+For each tick, we sell the pervious shares and buy new shares at the new market value, so the profit/loss at time t is given by:
+    PNL(t) = #unitsOwned * changeInPrice = mVal(y-1)(y(t)-y(t-1)/y(t-1), where y is the price at time t.
+
+Plotting a cumulative distribtion plot of this data, we should get a graph representing the P&L over the given timeframe. The main testcase here is a comparison to Ernie Chan's book. Using the USDCAD data, we get the following test statistics and P&L:
+
