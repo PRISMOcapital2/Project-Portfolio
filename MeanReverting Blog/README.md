@@ -137,7 +137,13 @@ We simply seek to own a quantity of stock proportional to the negative normalise
 For each tick, we sell the pervious shares and buy new shares at the new market value, so the profit/loss at time t is given by:
     PNL(t) = #unitsOwned * changeInPrice = mVal(y-1)(y(t)-y(t-1)/y(t-1), where y is the price at time t.
 
+We implement the previous statistical tests to determine whether the series is indeed mean reverting - and if so find the hald life of mean reversion. We use this half life as our lookbacks in our moving average and standard deviations.
 Plotting a cumulative distribtion plot of this data, we should get a graph representing the P&L over the given timeframe. The main testcase here is a comparison to Ernie Chan's book. Using the USDCAD data, we get the following test statistics and P&L:
 <p align="center">
   <img src="PnLUSDCAD.png" width="800">
 </p>
+This is the exact same as the outcome in Ernie Chan's book so im hyped af rn. Using the same trading strategy on the price of bitcoin for 5 minute tickers (which we have already seen is weakly mean reverting), we recieve the profits:
+<p align="center">
+  <img src="PnLBTC.png" width="800">
+</p>
+cool stuff
