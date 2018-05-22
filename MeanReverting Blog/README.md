@@ -147,3 +147,19 @@ This is the exact same as the outcome in Ernie Chan's book so im hyped af rn. Us
   <img src="PnLBTC.png" width="800">
 </p>
 cool stuff. I was accidentally reading a dataframe into the variance ratio test (instead of a list) hence the NAN's. The true result is (0.8809299369526877, -6.95414021910431, 1.7847945343874017e-12)
+
+### Cointegration
+As discussed in the early stages of this project, a price series is rarely stationary/ mean reverting on its own, however it is possible to construct a portfolio with certain hedges that are stationary. When we can create a stationary linear combination of non-stationary price series, the series' are cointegrated. (Hedge ratio = number of units longed/shorted for each asset). There are 2 main tests we'll explore for cointegration in price series: CADF and the Johansen test.
+
+## CADF
+When we do a linear regression of two price series, we'll retrieve a slope parameter describing linear correlation between them. THis value describes the hedge ratio of one asset against another, and if it's an accurate fit for a co-integrating pair of assets then the residuals of the fitted model (about this slope) should be stationary. Hence, we can run a adf test on the residuals of our model to test for co-integration. Doing so on the EWA-EWC (exchange traded funds) yields:
+```
+Test Statistic                   -3.163140
+p-value                           0.022220
+#Lags Used                        1.000000
+Number of Observations Used    2223.000000
+Critical Value (1%)              -3.433295
+Critical Value (5%)              -2.862841
+Critical Value (10%)             -2.567463
+```
+Hence, we are 95% certain that lambda != 0 i.e. the two series are cointegrated. I wanted to see if there was any co-integration bwtween bicoin and popular alt-coins as I always see negatively proportional changes in price in the crypto markets. The test resulted in:
