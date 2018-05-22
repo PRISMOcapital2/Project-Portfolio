@@ -146,4 +146,4 @@ This is the exact same as the outcome in Ernie Chan's book so im hyped af rn. Us
 <p align="center">
   <img src="PnLBTC.png" width="800">
 </p>
-cool stuff
+cool stuff. I was accidentally reading a dataframe into the variance ratio test (instead of a list) hence the NAN's. The true result is (0.8809299369526877, -6.95414021910431, 1.7847945343874017e-12)
