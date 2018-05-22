@@ -139,5 +139,5 @@ For each tick, we sell the pervious shares and buy new shares at the new market 
 
 Plotting a cumulative distribtion plot of this data, we should get a graph representing the P&L over the given timeframe. The main testcase here is a comparison to Ernie Chan's book. Using the USDCAD data, we get the following test statistics and P&L:
 <p align="center">
-  <img src="P&L USDCAD.png" width="600">
+  <img src="PnLUSDCAD.png" width="600">
 </p>
