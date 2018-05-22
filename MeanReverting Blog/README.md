@@ -163,3 +163,19 @@ Critical Value (5%)              -2.862841
 Critical Value (10%)             -2.567463
 ```
 Hence, we are 95% certain that lambda != 0 i.e. the two series are cointegrated. I wanted to see if there was any co-integration bwtween bicoin and popular alt-coins as I always see negatively proportional changes in price in the crypto markets. The test resulted in:
+```
+Test Statistic                   -2.750362
+p-value                           0.065721
+#Lags Used                       14.000000
+Number of Observations Used    4985.000000
+Critical Value (1%)              -3.431662
+Critical Value (5%)              -2.862120
+Critical Value (10%)             -2.567079
+```
+According to this, the price series' are almost at the 5% level that mu!=0. This is a strong indication that our price series are cointegrated, but we can visualise it by plotting the residuals of the model:
+<p align="center">
+  <img src="cointegrationBTCXMR.png" width="800">
+</p>
+This shows the residuals bouncing around 0, this looks like a stationary curve and also looks like money.
+
+## Johansen Test
