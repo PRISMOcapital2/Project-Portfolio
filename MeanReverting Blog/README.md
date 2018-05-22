@@ -186,7 +186,7 @@ plt.show()
 xmr_Const = sm.add_constant(xmr.values) # we want to add a constant under the assumption that there can be a nonzero off set of the pair portfolio’s price series
 model = sm.OLS(bitcoin.values,xmr_Const).fit()
 adf(model.resid)
-plt.plot(model.resid)
+plt.plot(model.resid) 
 plt.show()
 ```
 ## Johansen Test
