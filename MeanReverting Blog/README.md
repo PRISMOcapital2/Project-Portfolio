@@ -178,15 +178,15 @@ According to this, the price series' are almost at the 5% level that mu!=0. This
 </p>
 This shows the residuals bouncing around 0, this looks like a stationary curve and also looks like money.
 ```
-bitcoin = self.ts['Close'][-5000:]
-xmr = self.tsA['Close'][-5000:]
-plt.plot(bitcoin.values)
-plt.plot(omg.values)
-plt.show()
-xmr_Const = sm.add_constant(xmr.values) # we want to add a constant under the assumption that there can be a nonzero off set of the pair portfolio’s price series
-model = sm.OLS(bitcoin.values,xmr_Const).fit()
-adf(model.resid)
-plt.plot(model.resid) 
-plt.show()
+    bitcoin = self.ts['Close'][-5000:]
+    xmr = self.tsA['Close'][-5000:]
+    plt.plot(bitcoin.values)
+    plt.plot(omg.values)
+    plt.show()
+    xmr_Const = sm.add_constant(xmr.values) # we want to add a constant under the assumption that there can be a nonzero off set of the pair portfolio’s price series
+    model = sm.OLS(bitcoin.values,xmr_Const).fit()
+    adf(model.resid)
+    plt.plot(model.resid) 
+    plt.show()
 ```
 ## Johansen Test
