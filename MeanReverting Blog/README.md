@@ -190,3 +190,30 @@ This shows the residuals bouncing around 0, this looks like a stationary curve a
     plt.show()
 
 ## Johansen Test
+The johansen test is testing for stationarity in the matrix eqn:
+```
+ΔY(t) = BY(t − 1) + M + βt + A1ΔY(t − 1) + … + AkΔY(t − k) + ∋(t)
+where B =  λ in vector form. We are testing if B=0
+M,B,A all matrices
+Y is a [len(ts) x n] matrix for n time series
+```
+let r = rank(B), which corresponds to the number of independent portfolios we can construct for the potentially cointegrated time series'. We are testing for the number of r, recieving confidences that r==0, r<=1, r<=2,... ,r<=n-1. This is found via 2 statistical tests, finding a trace and a eigen statistic. The math behind this is an exploration for a later date. The statsmodel module used to include a johansen test module, but it's been lost within other branches so I had to use a branch from a few years ago & convert to python3. Running the test on the EWCEWA data as in ernie chan's book, we retrieve:
+```
+--------------------------------------------------
+--> Trace Statistics
+variable statistic Crit-90% Crit-95%  Crit-99%
+r = 0 t 17.568396088804985 13.4294 15.4943 19.9349
+r = 1 t 4.851448253638874 2.7055 3.8415 6.6349
+--------------------------------------------------
+--> Eigen Statistics
+variable statistic Crit-90% Crit-95%  Crit-99%
+r = 0 t 12.716947835166113 12.2971 14.2639 18.52
+r = 1 t 4.851448253638874 2.7055 3.8415 6.6349
+--------------------------------------------------
+eigenvectors:n [[ 0.5572649  -0.38211549]
+ [-0.65401841  0.13409347]]
+--------------------------------------------------
+eigenvalues:n [0.00570685 0.00218099]
+--------------------------------------------------
+```
+This indicates that we reject the null that there is less than 2 linear combos with 95% confidence by both the eigen and trace statistics. The linear combinations are given under the eigenvectors, with the corresponding eigenvalues.
