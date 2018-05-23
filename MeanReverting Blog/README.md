@@ -216,4 +216,29 @@ eigenvectors:n [[ 0.5572649  -0.38211549]
 eigenvalues:n [0.00570685 0.00218099]
 --------------------------------------------------
 ```
-This indicates that we reject the null that there is less than 2 linear combos with 95% confidence by both the eigen and trace statistics. The linear combinations are given under the eigenvectors, with the corresponding eigenvalues.
+This indicates that we reject the null that there is less than 2 linear combos with 95% confidence by both the eigen and trace statistics. The linear combinations are given under the eigenvectors, with the corresponding eigenvalues.The eigenvalues are ordered high to low, with the highest corresponding to the "strongest" linear combo with the fastest mean reversion half life. The test can be carried out for n time series too, which I tested on the EWA, EWC and IGE ETF's:
+```
+--------------------------------------------------
+--> Trace Statistics
+variable statistic Crit-90% Crit-95%  Crit-99%
+r = 0 t 32.2079137305541 27.0669 29.7961 35.4628
+r = 1 t 16.683723355665077 13.4294 15.4943 19.9349
+r = 2 t 5.384494123019343 2.7055 3.8415 6.6349
+--------------------------------------------------
+--> Eigen Statistics
+variable statistic Crit-90% Crit-95%  Crit-99%
+r = 0 t 15.524190374889017 18.8928 21.1314 25.865
+r = 1 t 11.29922923264573 12.2971 14.2639 18.52
+r = 2 t 5.384494123019343 2.7055 3.8415 6.6349
+--------------------------------------------------
+eigenvectors:n [[ 0.76975358  0.07167801  0.07225663]
+ [-0.87789041 -0.82785766  0.24339546]
+ [ 0.08870492  0.57532642 -0.07362409]]
+--------------------------------------------------
+eigenvalues:n [0.01032348 0.00752451 0.00359279]
+--------------------------------------------------
+```
+Here, we find we have three cointegrating relations with >95% certainty. We want to implement a similar trading Linear trading strategy to test profit potential, so we need to compute the half life of mean reversion for our portfolio.
+
+## Half life of mean reversion for cointegrated time series
+
