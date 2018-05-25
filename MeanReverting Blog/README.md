@@ -242,3 +242,69 @@ Here, we find we have three cointegrating relations with >95% certainty. We want
 
 ## Half life of mean reversion for cointegrated time series
 
+The half life of mean reversion if found using the same method as found above, but this time we include a matrix marketVal which multiplies each time series element by the corresponding eigenvector value, to give the market value of the portfolio at every time according to our johansen test. This marketValue is equivalent to the linear combination optimisted by the johansen test, being calculated at each time 't'.
+
+We then regress Y(t)-Y(t-1) vs the market value at time T, where Y is a Txn matrix including our 'n' time series, to retrieve the half life of mean reversion for a linear combination of our time series with the coefficients given by the eigenvectors from johansen test. (we use the first eigenvector as is corresponds to the shortest length of mean reversion).
+```
+def halfLife_coint(y, evec):
+    marketVal = np.sum(np.multiply(repmat(evec,len(y[1]),1),y),1)
+    deltaY = np.diff(marketVal,axis=0)
+    yy = np.hstack([marketVal[1:],np.ones((len(marketVal[1:]),1))])
+    beta = np.linalg.lstsq(yy, deltaY)
+    half_life = log(2) / beta[0]
+    return half_life[0], marketVal, evec
+```
+Running this on the EFT's of ewc, ewa and ige, we retrieve a half life of mean reverson of 25 days which isn't too far from ernie's 23 days. Im guessing this difference stems from differences in the data sets (different end and start points). It should be a point of investigation in the future however.
+```
+--------------------------------------------------
+--> Trace Statistics
+variable statistic Crit-90% Crit-95%  Crit-99%
+r = 0 t 32.2079137305541 27.0669 29.7961 35.4628
+r = 1 t 16.683723355665077 13.4294 15.4943 19.9349
+r = 2 t 5.384494123019343 2.7055 3.8415 6.6349
+--------------------------------------------------
+--> Eigen Statistics
+variable statistic Crit-90% Crit-95%  Crit-99%
+r = 0 t 15.524190374889017 18.8928 21.1314 25.865
+r = 1 t 11.29922923264573 12.2971 14.2639 18.52
+r = 2 t 5.384494123019343 2.7055 3.8415 6.6349
+--------------------------------------------------
+eigenvectors:n [[-0.87789041 -0.82785766 -0.24339546]
+ [ 0.76975358  0.07167801 -0.07225663]
+ [ 0.08870492  0.57532642  0.07362409]]
+--------------------------------------------------
+eigenvalues:n [0.01032348 0.00752451 0.00359279]
+--------------------------------------------------
+[-0.87789041  0.76975358  0.08870492]
+C:\Users\Billy\Documents\Code\MeanRevertingStrategy\backtest.py:103: FutureWarning: `rcond` parameter will change to the default of machine precision times ``max(M, N)`` where M and N are the input matrix dimensions.
+To use the future default and silence this warning we advise to pass `rcond=None`, to keep using the old, explicitly pass `rcond=-1`.
+  beta = np.linalg.lstsq(yy, deltaY)
+Lookback:        [[25.25137904]]
+```
+Finding the half life on an Bitcoin / XMR / ETH integrated portfolio returns a half life of mean reversion of 16 days:
+```
+--------------------------------------------------
+--> Trace Statistics
+variable statistic Crit-90% Crit-95%  Crit-99%
+r = 0 t 50.075369779754695 27.0669 29.7961 35.4628
+r = 1 t 11.463537268052487 13.4294 15.4943 19.9349
+r = 2 t 0.8046203273094117 2.7055 3.8415 6.6349
+--------------------------------------------------
+--> Eigen Statistics
+variable statistic Crit-90% Crit-95%  Crit-99%
+r = 0 t 38.61183251170221 18.8928 21.1314 25.865
+r = 1 t 10.658916940743076 12.2971 14.2639 18.52
+r = 2 t 0.8046203273094117 2.7055 3.8415 6.6349
+--------------------------------------------------
+eigenvectors:n [[ 0.00912317 -0.00274728  0.00064343]
+ [-0.32772813  0.01344684 -0.04555705]
+ [ 0.01828183  0.02547802 -0.0182097 ]]
+--------------------------------------------------
+eigenvalues:n [0.00769723 0.00213079 0.00016101]
+--------------------------------------------------
+C:\Users\Billy\Documents\Code\MeanRevertingStrategy\backtest.py:102: FutureWarning: `rcond` parameter will change to the default of machine precision times ``max(M, N)`` where M and N are the input matrix dimensions.
+To use the future default and silence this warning we advise to pass `rcond=None`, to keep using the old, explicitly pass `rcond=-1`.
+  beta = np.linalg.lstsq(yy, deltaY)
+Lookback:        [[16.46577736]]
+```
+Take note that the eigenvector here is [ 0.00912317 -0.32772813  0.01828183]. Make sure you don't confuse the output of the johansen test & accidentally take a row as the eigenvector.
