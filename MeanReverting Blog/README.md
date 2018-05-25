@@ -353,17 +353,17 @@ def cointegrated_series(Ar, statTest = True):   #Ar =  [[TS(1)E(1), TS(2)E(1), .
 ```
 We can now visualise potential profits in a simple mean reverting strategy for a cointegrated time series. For the ETF's in the above examples, the plot of returns vs time is:
 <p align="center">
-  <img src="EFT's.png" width="800">
+  <img src="EFT's.png" width="600">
 </p>
 For the btc/eth/xmr cointegrated series, the returns for 5m ticker data are:
 <p align="center">
-  <img src="btcethxmr.png" width="800">
+  <img src="btcethxmr.png" width="600">
 </p>
 For the btc/eth/xmr cointegrated series, the returns for 30m ticker data are:
 <p align="center">
-  <img src="btcethxmr1.png" width="800">
+  <img src="btcethxmr1.png" width="600">
 </p>
 For the btc/eth/xmr cointegrated series, the returns for 31d ticker data are:
 <p align="center">
-  <img src="btcethxmr2.png" width="800">
+  <img src="btcethxmr2.png" width="600">
 </p>
