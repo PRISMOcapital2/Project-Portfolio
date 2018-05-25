@@ -363,7 +363,7 @@ For the btc/eth/xmr cointegrated series, the returns for 30m ticker data are:
 <p align="center">
   <img src="btcethxmr1.png" width="600">
 </p>
-For the btc/eth/xmr cointegrated series, the returns for 31d ticker data are:
+For the btc/eth/xmr cointegrated series, the returns for 1 day ticker data are:
 <p align="center">
   <img src="btcethxmr2.png" width="600">
 </p>
