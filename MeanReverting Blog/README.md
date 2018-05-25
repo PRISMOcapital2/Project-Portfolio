@@ -367,3 +367,7 @@ For the btc/eth/xmr cointegrated series, the returns for 1 day ticker data are:
 <p align="center">
   <img src="btcethxmr2.png" width="600">
 </p>
+
+All of the previous content up to this point has been a learning process and a proof of theory. Now, the next step is to construct a functional algorithm that trades under the discussed strategy, and realise the profits - if they exist.
+
+### Implementing the mean reverting strategy
