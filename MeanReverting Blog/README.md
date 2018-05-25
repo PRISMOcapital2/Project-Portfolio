@@ -308,3 +308,62 @@ To use the future default and silence this warning we advise to pass `rcond=None
 Lookback:        [[16.46577736]]
 ```
 Take note that the eigenvector here is [ 0.00912317 -0.32772813  0.01828183]. Make sure you don't confuse the output of the johansen test & accidentally take a row as the eigenvector.
+
+## Linear trading srtategy
+We observe the same method here as in the case of one series. he algorithm works as follows, (it might be a bit tricky to wrap your head around first):
+Again, from a quantopian blog:
+```
+The total worth of the portfolio at time t is marketValue, which is the sum of each position multiplied with its equivalent value from the first column of the eigenvector from the Johansen test.
+numUnits is the negative z-score of the total worth of the portfolio with a lookback period equal to the half-life of the mean reversion. The z-score tells you how many standard deviations you are away from the mean.
+We then multiply the z-score with the assignment according to Johansen (AA*BB) and get the worth of the portfolio which give us the positions which we have entered.
+Now we multiply the position values with the change in price and divide that by the previous day’s price to give us the profit/loss at time t.
+You can see that the strategy continuously enters and exits, which is not a realistic assumption. However, according to Chan, this will give a valid indication whether a strategy might be worth pursuing in the first place.
+```
+Corresponding to the code:
+```
+def cointegrated_series(Ar, statTest = True):   #Ar =  [[TS(1)E(1), TS(2)E(1), ...TS(n)E(1)]
+                                                #       [TS(1)E(2), TS(2)E(2), ...TS(n)E(2)]
+                                                #       ...
+                                                #       [TS(1)E(n), TS(2)E(n), ...TS(n)E(n)]]
+    johansenTest = coint_johansen(Ar,0,2)
+    lookback, marketVal, evec = halfLife_coint(Ar, johansenTest.evec[:,0])
+
+    marketVal = pd.DataFrame(marketVal)
+    MA = pd.DataFrame(np.transpose(movingAve(marketVal.values, lookback)))
+    SD = pd.DataFrame(np.transpose(movingStd(marketVal.values, lookback)))
+    numUnits = -(marketVal-MA)/SD
+    AA = repmat(numUnits,1,len(np.transpose(Ar)))
+    BB = np.multiply(repmat(evec,len(Ar),1),Ar)
+    positions = np.multiply(AA,BB)
+    pnl = np.sum(np.divide(np.multiply(positions[:-1],np.diff(Ar,axis = 0)), Ar[:-1]),1)
+    returns = np.divide(pnl,np.roll(np.sum(abs(positions[:-1]),1),-1))
+    
+    pnlCumSum = [0]*len(pnl)
+    for count, pnlsum in enumerate(returns):
+        if count>=int(lookback):
+            pnlCumSum[count]+=pnlCumSum[count-1]+pnlsum
+        else:
+            pnlCumSum[count]=0
+
+    if statTest==True:
+        print('Lookback:\t',lookback)
+        
+    plt.plot(pnlCumSum)
+    plt.show()
+```
+We can now visualise potential profits in a simple mean reverting strategy for a cointegrated time series. For the ETF's in the above examples, the plot of returns vs time is:
+<p align="center">
+  <img src="ETF's.png" width="800">
+</p>
+For the btc/eth/xmr cointegrated series, the returns for 5m ticker data are:
+<p align="center">
+  <img src="btcethxmr.png" width="800">
+</p>
+For the btc/eth/xmr cointegrated series, the returns for 30m ticker data are:
+<p align="center">
+  <img src="btcethxmr1.png" width="800">
+</p>
+For the btc/eth/xmr cointegrated series, the returns for 31d ticker data are:
+<p align="center">
+  <img src="btcethxmr2.png" width="800">
+</p>
