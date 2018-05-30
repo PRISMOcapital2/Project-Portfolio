@@ -369,5 +369,19 @@ For the btc/eth/xmr cointegrated series, the returns for 1 day ticker data are:
 </p>
 
 All of the previous content up to this point has been a learning process and a proof of theory. Now, the next step is to construct a functional algorithm that trades under the discussed strategy, and realise the profits - if they exist.
-
+ 
+  
+   
+   
 ### Implementing the mean reverting strategy
+ 
+The first step here was to convert the backtesting module into a 'live' module. The backtesting has been using arrays of historical data which cannot be done for live trading. Instead, we need a program that is given an individual price point and makes trading decisions with that new (individual) piece of data. This functionality was added to the program, and can be executed by running a 'pseudolive' command through the terminal:
+```
+-x ernie -s pseudolive -m ewa,ewc,ige -p 5m
+-x is the exchange (called ernie for the data he used, otherwise use poloniex)
+-s is the state (live, backtest, pseudolive)
+-m the exchanges
+-p the period
+```
+This yields the same cumulative returns for ernie's data and for the bitcoin cointegration we tested above, hence indicating the pseudolive module works as desired.
+
