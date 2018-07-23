@@ -385,3 +385,23 @@ The first step here was to convert the backtesting module into a 'live' module. 
 ```
 This yields the same cumulative returns for ernie's data and for the bitcoin cointegration we tested above, hence indicating the pseudolive module works as desired.
 
+
+### That was super hard
+I've spent the last month and a bit only doing small updates to the code (which can be found in the 23.07.2018 folder) but have finally got a modular algorithm that can be run live. This took way longer than I expected because I had to deal with a whole lot of io to get it working niceley. As of now, it's at the stage where you first backtest it using a command such as
+'''
+python main.py -x poloniex -s backtest -m ETH/USDT,XMR/USDT,BTC/USDT -p 5m
+'''
+and the comnpooter finds the appropriate eigen vector, and lookback time. It is saved to the appropriate directory, so we can test it by running a 'live simulation':
+'''
+python main.py -x poloniex -s backtest -m ETH/USDT,XMR/USDT,BTC/USDT -p 5m
+'''
+This is way slower than the backtesting module, because it saves and loads a portfolio of currently owned assets in each iteration (as you'd want for a live module). It's pretty robust and i'm happy with it. It isn't producing identical results, however. For example, the ETH/USDT,XMR/USDT,BTC/USDT cointegrated portfolio gives a cumulative pnl looking like:
+<p align="center">
+  <img src="buttcoinCoint.png" width="600">
+</p>
+and the ernie chan data gives a cumulative pnl like:
+<p align="center">
+  <img src="ernieCoint.png" width="600">
+</p>
+Clearly work needs to be done.
+
