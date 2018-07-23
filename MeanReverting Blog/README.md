@@ -403,5 +403,5 @@ and the ernie chan data gives a cumulative pnl like:
 <p align="center">
   <img src="ernieCoint.png" width="600">
 </p>
-Clearly work needs to be done.
+This just looks like a less spiky version of the plot in ernie's book and in our backtests. This could come from a mis-calculation or a rounding error or a huge numebr of other things i need to look into. work needs to be done.
 
