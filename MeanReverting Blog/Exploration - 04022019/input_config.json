@@ -1,0 +1,20 @@
+{
+	"data_and_directories": {
+			"newData": true,
+			"previous_data_name": false,
+
+			"main_src_directory": "C:/Users/Billy/Documents/Code/Machine_learning_finance/Exploration",
+			"main_data_directory": "D:/Machine_learning_finance/raw_data/"
+	},
+
+	"data_information": {
+
+			"currencies" : "ETH/BTC,BTC/USDT,XMR/BTC",
+			"period" : "1d",
+			"asset_type" : "cryptocurrency",
+			"pip" : 0.00005,
+			"forecastLen" : 1,
+			"exchange" : "poloniex"
+	}
+
+}
